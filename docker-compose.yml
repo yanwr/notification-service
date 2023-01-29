@@ -13,28 +13,8 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
     volumes:
       - pgdata:/data/postgres
-    networks:
-      - webnet
     env_file:
       - .env
-  app:
-    container_name: notification-service
-    build: .
-    restart: always
-    command: npm run start:dev
-    ports: 
-      - ${SERVER_PORT}:${SERVER_PORT}
-    volumes: 
-      - .:/app
-      - /app/node_modules
-    networks:
-      - webnet
-    depends_on:
-      - database
-    env_file:
-      - .env
-networks:
-  webnet:
 volumes:
   pgdata:
     driver: local
